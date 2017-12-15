@@ -94,7 +94,7 @@ var search_sefaz = function (productName, latitude, longitude, radius, callback)
       });
       res.on('error', function(e) {
         console.log('problem with request: ' + e.message);
-        callback(null);
+        callback(null, e);
       });
       res.on('end', function() {
         console.log('end!!');
