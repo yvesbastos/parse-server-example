@@ -43,24 +43,18 @@ Parse.Cloud.define("getProducts", function(request, response) {
         response.success(results);
       } else {
         search_sefaz(description, location.latitude, location.longitude, radius, function(results, error) {
-
-          //if (error == null) {
           if  (results != null && results.length > 0) {
-            response.success(results);
-            // if (results.error != null) {
-            //   response.error(results.error);
-            //   return
-            // }
-            // for (var productSale of results) {
-            //   var sale = new Parse.Object("ProductSearch")
-            //
-            //   // TODO: set location and store
-            //   sale.set({body: productSale.dscProduto, barcode: productSale.codGetin, ncm: codNcm, minValue: productSale.valMinimoVendido, maxValue: productSale.valMaximoVendido, price: productSale.valUltimaVenda})
-            //   sale.save();
-            // }
+            
+            for (var productSale of results) {
+              var sale = new Parse.Object("ProductSearch")
+
+              // TODO: set location and store
+              sale.set({body: productSale.dscProduto, barcode: productSale.codGetin, ncm: codNcm, minValue: productSale.valMinimoVendido, maxValue: productSale.valMaximoVendido, price: productSale.valUltimaVenda})
+              sale.save();
+            }
 
             //TODO: actually return values
-            //response.success([]);
+            response.success([]);
           } else {
             var err = error;
 
