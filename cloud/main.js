@@ -10,7 +10,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
   const query = new Parse.Query("ProductSearch");
   var limit = request.params.limit;
   var skip = request.params.skip;
-  var location = request.params.location;
+  //var location = request.params.location;
   var radius = request.params.radius;
   var description = request.params.description;
 
