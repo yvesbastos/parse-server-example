@@ -28,7 +28,9 @@ Parse.Cloud.define("getProducts", function(request, response) {
 
   query.limit = limit
   query.skip = skip
-  query.withinKilometers("location", radius);
+
+  //TODO: not working
+  //query.withinKilometers("location", radius);
   query.include("store");
 
   //PROBLEMA: se o usuario estiver em Arapiraca e ja tiver
