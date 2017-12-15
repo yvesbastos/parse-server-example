@@ -70,7 +70,6 @@ Parse.Cloud.define("getProducts", function(request, response) {
             response.error(err);
           }
         })
-        response.success([]);
       }
     })
     .catch((e) =>  {
