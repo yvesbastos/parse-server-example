@@ -10,7 +10,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
   const query = new Parse.Query("ProductSearch");
   var limit = request.params.limit;
   var skip = request.params.skip;
-  //var location = request.params.location;
+  var location = request.params.location;
   var radius = request.params.radius;
   var description = request.params.description;
 
@@ -42,8 +42,10 @@ Parse.Cloud.define("getProducts", function(request, response) {
       if  (results != null && results.length > 0) {
         response.success(results);
       } else {
-        search_sefaz(description, 0, 0, radius, function(results, error) {
-          if  (results != null && results.length > 0) {
+        search_sefaz(description, location.latitude, location.longitude, radius, function(results, error) {
+
+          if (error == null) {
+          // if  (results != null && results.length > 0) {
             // for (var productSale of results) {
             //   var sale = new Parse.Object("ProductSearch")
             //
@@ -70,8 +72,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
 
 
 var search_sefaz = function (productName, latitude, longitude, radius, callback) {
-    callback([1, 2, 3, 4], null)
-    /*console.log("searching at sefaz");
+    console.log("searching at sefaz");
 
     var options = {
       hostname: 'api.sefaz.al.gov.br',
@@ -117,5 +118,5 @@ var search_sefaz = function (productName, latitude, longitude, radius, callback)
     };
     var requestString = JSON.stringify(requestBody);
     req.write(requestString);
-    req.end();*/
+    req.end();
 }
