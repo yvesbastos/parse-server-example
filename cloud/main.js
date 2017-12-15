@@ -32,7 +32,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
   //PROBLEMA: se o usuario estiver em Arapiraca e ja tiver
   //resultados de Maceio no Parse, ele nunca vai conseguir
   //ver resultados de Arapiraca
-  query.contains("body", description);
+  query.contains("body", description)
     .find()
     .then((results) => {
       if  (results != null && results.length > 0) {
@@ -44,7 +44,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
               var sale = new Parse.Object("ProductSearch")
 
               // TODO: set location and store
-              sale.set({body: productSale.dscProduto, , barcode: productSale.codGetin, ncm: codNcm, minValue: productSale.valMinimoVendido, maxValue: productSale.valMaximoVendido, price: productSale.valUltimaVenda})
+              sale.set({body: productSale.dscProduto, barcode: productSale.codGetin, ncm: codNcm, minValue: productSale.valMinimoVendido, maxValue: productSale.valMaximoVendido, price: productSale.valUltimaVenda})
               sale.save();
             }
 
@@ -53,7 +53,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
           } else {
             response.error(error);
           }
-        }
+        })
       }
     })
     .catch(() =>  {
