@@ -62,7 +62,12 @@ Parse.Cloud.define("getProducts", function(request, response) {
             //TODO: actually return values
             //response.success([]);
           } else {
-            response.error(error);
+            var err = error;
+
+            if (!err) {
+                err = results;
+            }
+            response.error(err);
           }
         })
         response.success([]);
