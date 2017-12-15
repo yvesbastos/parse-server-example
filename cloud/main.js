@@ -42,7 +42,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
       if  (results != null && results.length > 0) {
         response.success(results);
       } else {
-        search_sefaz(description, 0, 0, radius, function(results, error) {
+        /*search_sefaz(description, 0, 0, radius, function(results, error) {
           if  (results != null && results.length > 0) {
             for (var productSale of results) {
               var sale = new Parse.Object("ProductSearch")
@@ -57,7 +57,8 @@ Parse.Cloud.define("getProducts", function(request, response) {
           } else {
             response.error(error);
           }
-        })
+        })*/
+        response.success([]);
       }
     })
     .catch((e) =>  {
@@ -67,7 +68,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
 
 
 
-
+/*
 var search_sefaz = function (productName, latitude, longitude, radius, callback) {
     console.log("searching at sefaz");
 
@@ -116,4 +117,4 @@ var search_sefaz = function (productName, latitude, longitude, radius, callback)
     var requestString = JSON.stringify(requestBody);
     req.write(requestString);
     req.end();
-}
+}*/
