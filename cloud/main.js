@@ -6,6 +6,7 @@ Parse.Cloud.define('hello', function(req, res) {
 
 
 Parse.Cloud.define("getProducts", function(request, response) {
+  console.log("Initializing getProducts");
   const query = new Parse.Query("ProductSearch");
   var limit = request.params.limit;
   var skip = request.params.skip;
