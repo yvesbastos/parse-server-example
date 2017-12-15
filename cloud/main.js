@@ -58,8 +58,8 @@ Parse.Cloud.define("getProducts", function(request, response) {
         })
       }
     })
-    .catch(() =>  {
-      response.error("error");
+    .catch((e) =>  {
+      response.error(e);
     });
 });
 
