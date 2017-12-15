@@ -46,10 +46,11 @@ Parse.Cloud.define("getProducts", function(request, response) {
 
           //if (error == null) {
           if  (results != null && results.length > 0) {
-            if (results.error != null) {
-              response.error(results.error);
-              return
-            }
+            response.success(results);
+            // if (results.error != null) {
+            //   response.error(results.error);
+            //   return
+            // }
             // for (var productSale of results) {
             //   var sale = new Parse.Object("ProductSearch")
             //
@@ -59,7 +60,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
             // }
 
             //TODO: actually return values
-            response.success([]);
+            //response.success([]);
           } else {
             response.error(error);
           }
