@@ -45,7 +45,11 @@ Parse.Cloud.define("getProducts", function(request, response) {
         search_sefaz(description, location.latitude, location.longitude, radius, function(results, error) {
 
           //if (error == null) {
-           if  (results != null && results.length > 0) {
+          if  (results != null && results.length > 0) {
+            if (results.error != null) {
+              response.error(results.error);
+              return
+            }
             // for (var productSale of results) {
             //   var sale = new Parse.Object("ProductSearch")
             //
