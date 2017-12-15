@@ -1,3 +1,4 @@
+var http = require('http');
 
 Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
@@ -65,7 +66,7 @@ Parse.Cloud.define("getProducts", function(request, response) {
 
 
 var search_sefaz = function (productName, latitude, longitude, radius, callback) {
-    logger.log("searching at sefaz");
+    console.log("searching at sefaz");
 
     var options = {
       hostname: 'api.sefaz.al.gov.br',
@@ -79,18 +80,18 @@ var search_sefaz = function (productName, latitude, longitude, radius, callback)
     };
 
     var req = http.request(options, function(res) {
-      logger.log('Status: ' + res.statusCode);
+      console.log('Status: ' + res.statusCode);
       res.setEncoding('utf8');
       var body = '';
       res.on('data', function (chunk) {
         body += chunk;
       });
       res.on('error', function(e) {
-        logger.log('problem with request: ' + e.message);
+        console.log('problem with request: ' + e.message);
         callback(null);
       });
       res.on('end', function() {
-        logger.log('end!!');
+        console.log('end!!');
         var jsonBody;
         try {
           jsonBody = JSON.parse(body);
