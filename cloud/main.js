@@ -1,5 +1,24 @@
 var http = require('http');
 
+Parse.Cloud.beforeSave('Store', function (request, response) {
+    new Parse.Query('Store')
+        .equalTo("cnpj", request.object.get("cnpj"))
+        .find()
+        .then(function (results) {
+        if (results.length == 0) {
+            response.success();
+        }
+        else {
+            response.error("Ops! Já existe uma loja cadastrada com esse CNPJ");
+        }
+    }, function (error) {
+        response.error(error.message);
+    });
+});
+
+
+
+
 Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
@@ -42,9 +61,10 @@ Parse.Cloud.define("getProducts", function(request, response) {
       if  (results != null && results.length > 0) {
         response.success(results);
       } else {
+        //TODO: use other criteria to decide if a sefaz  fetch is needed
         search_sefaz(description, location.latitude, location.longitude, radius, function(results, error) {
           if  (results != null && results.length > 0) {
-            
+
             for (var productSale of results) {
               var sale = new Parse.Object("ProductSearch")
 
@@ -70,9 +90,6 @@ Parse.Cloud.define("getProducts", function(request, response) {
       response.error(e);
     });
 });
-
-
-
 
 var search_sefaz = function (productName, latitude, longitude, radius, callback) {
     console.log("searching at sefaz");
